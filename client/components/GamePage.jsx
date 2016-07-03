@@ -1,53 +1,35 @@
 import React from 'react';
-import Timer from '../components/Timer.jsx';
+import SelectName from '../components/SelectName.jsx';
 
 class GamePage extends React.Component {
 
 	constructor() {
 		super();
-		this.state = {
-			timeRemaining: "3:00",
-			paused: true
-		};
-		this.onStart = this.onStart.bind(this);
-		this.onPause = this.onPause.bind(this);
-		this.onReset = this.onReset.bind(this);
-		this.selectTimerLength = this.selectTimerLength.bind(this);
-	}
-
-	onStart() {
-		console.log("started");
-		this.setState({ paused: false });
-	}
-
-	onPause() {
-		console.log("paused");
-		this.setState({ paused: true });
-	}
-
-	onReset() {
-		console.log("resetting timer");
-		this.setState({ timeRemaining: "3:00" });
-	}
-
-	selectTimerLength(length) {
-		console.log("updated timer length", length);
-		this.setState({ timeRemaining: length });
 	}
 
 	render() {
-		return (
-			<Timer 
-				timeRemaining={this.state.timeRemaining}
-				paused={this.state.paused}
-				isLeader={true}
-				onStart={this.onStart}
-				onPause={this.onPause}
-				onReset={this.onReset}
-				timerLengths={["1:00", "3:00", "5:00"]}
-				onChangeTimerLength={this.selectTimerLength} />
-		)
+		if(this.props.stage == "Lobby") {
+			return(
+				//change to lobby component later
+				<SelectName
+					gameId={this.props.gameId}
+					accessCode={this.props.accessCode} />
+			)
+		}
 	}
+}
+
+GamePage.propTypes = {
+	gameId: React.PropTypes.string,
+	players: React.PropTypes.array,
+	stage: React.PropTypes.string,
+	leader: React.PropTypes.string,
+	accessCode: React.PropTypes.string,
+	deckList: React.PropTypes.array,
+	timerLength: React.PropTypes.number,
+	timerEndTime: React.PropTypes.date,
+	timerPaused: React.PropTypes.bool,
+	timerPausedTime: React.PropTypes.date
 }
 
 export default GamePage;

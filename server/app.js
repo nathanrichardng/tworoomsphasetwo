@@ -74,7 +74,7 @@ Meteor.startup(() => {
 
 	    var ctShyGuy = {
 	      name: "Shy Guy (Blue Team)",
-	      description: "It's not so much that you don't have anything to say, you just don't like to toot your own horn. In fact, you can't even tell anyone how proud you are for working with the president.",
+	      description: "It's not so much that you don't have anything to say, you just don't like to toot your own horn. In fact, you can't even tell anyone how proud you are of working with the president.",
 	      team: "Blue",
 	      core: false
 	    }

@@ -22,3 +22,6 @@ kadira:flow-router
 aldeed:simple-schema
 aldeed:collection2
 twbs:bootstrap
+u2622:persistent-session
+momentjs:moment
+mizzao:timesync

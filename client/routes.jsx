@@ -5,7 +5,7 @@ import {Layout, Welcome} from './app.jsx';
 import Home from './components/Home.jsx';
 import CardListContainer from './containers/CardListContainer.jsx';
 import CardContainer from './containers/CardContainer.jsx';
-import TimerContainer from './containers/TimerContainer.jsx';
+import GamePageContainer from './containers/GamePageContainer.jsx';
 
 FlowRouter.route("/", {
   action() {
@@ -15,18 +15,26 @@ FlowRouter.route("/", {
   }
 });
 
-FlowRouter.route("/cards/:_id", {
+FlowRouter.route("/game/:_id", {
   action({_id}) {
     mount(Layout, {
-        content: (<CardContainer _id={_id} />)
+        content: (<GamePageContainer _id={_id} />)
     });
   }
 });
 
-FlowRouter.route("/timer", {
+FlowRouter.route("/cards", {
+  action() {
+    mount(Layout, {
+        content: (<CardListContainer />)
+    });
+  }
+});
+
+FlowRouter.route("/cards/:_id", {
   action({_id}) {
     mount(Layout, {
-        content: (<TimerContainer />)
+        content: (<CardContainer _id={_id} />)
     });
   }
 });

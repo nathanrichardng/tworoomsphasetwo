@@ -26,8 +26,7 @@ class Home extends React.Component {
 	        }
 	        else {
 	        	console.log("gameId", gameId)
-	        	FlowRouter.go("/timer");
-				//FlowRouter.go("/game/"+gameId);
+				FlowRouter.go("/game/"+gameId);
 				/* add this with howl later
 				var Airhorn = new Howl({
 				src: ['/sounds/airhorn.mp3'],
