@@ -2,6 +2,7 @@ import React from 'react';
 import {mount} from 'react-mounter';
 // load Layout and Welcome React components
 import {Layout, Welcome} from './app.jsx';
+import Home from './components/Home.jsx';
 import CardListContainer from './containers/CardListContainer.jsx';
 import CardContainer from './containers/CardContainer.jsx';
 import TimerContainer from './containers/TimerContainer.jsx';
@@ -9,7 +10,7 @@ import TimerContainer from './containers/TimerContainer.jsx';
 FlowRouter.route("/", {
   action() {
     mount(Layout, {
-        content: (<CardListContainer />)
+        content: (<Home />)
     });
   }
 });

@@ -1,1 +1,217 @@
 /* CSS declarations go here */
+.fa-bomb {
+	color: #C93C3C;
+}
+
+.spinner-holder {
+	position:absolute;
+	top: 50%;
+	left: 50%;
+	width: 300px;
+	height: 300px;
+	transform: translate(-150px, -150px);
+}
+
+.fa-bomb.spinner {
+  font-size: 200px;
+  text-align: center;
+  width: 100%;
+  animation: fa-bomb 1s infinite linear;
+}
+
+@keyframes fa-bomb {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.jumbotron {
+	font-family: 'Gotham medium', serif;
+}
+
+.playersWidget {
+	box-shadow: 5px 5px 15px #333;
+	-webkit-box-shadow: 5px 5px 15px #333;
+	margin-top: 20px;
+	overflow: hidden;
+	color: #363D38;
+	background-color: #BFBFBF;
+}
+
+.playersWidget ul {
+	margin: 0px;
+	padding: 5px;
+	padding-bottom: 15px;
+}
+
+.playersWidget h3 {
+	padding: 10px 20px;
+	margin: 0px;
+	background-color: #8C8C8C;
+	color: #fff;
+	font-family: 'Gotham medium', serif;
+	text-shadow: 1px 1px 30px #333;
+}
+
+.player-item {
+	margin: 10px 3px;
+	padding: 5px 20px;
+	background-color: #92DEA4;
+	box-shadow: 1px 1px 5px #333;
+	-webkit-box-shadow: 1px 1px 5px #333;
+	font-size: 18px;
+}
+
+.Red {
+	color: #B33E3E;
+	background-color: #B0B0B0;
+}
+
+.Blue {
+	color: #6CD3EB;
+	background-color: #878787;
+}
+
+.Grey {
+	color: #92DEA4;
+	background-color: #8F8F8F;
+}
+
+.card {
+	min-height: 500px;
+	margin-bottom: 20px;
+	border-radius: 30px;
+	border: 5px solid #D6D6D6;
+	box-shadow: 0px 0px 5px #333;
+	-webkit-box-shadow: 0px 0px 5px #333;
+}
+
+.cards-list {
+	height: 300px;
+	overflow-y: scroll;
+}
+
+.spacer {
+	margin-top: 50px;
+}
+
+.scroll-x {
+	overflow-x: auto;
+	z-index: -1;
+}
+
+#game-address {
+	z-index: 10;
+}
+
+.button:active, .button:link, .lobby .button:active, .lobby .button:link {
+	box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+	-webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+
+.new-game-button, .join-game-button {
+	margin-top: 25px;
+	height: 50px;
+	font-size: 32px;
+	color:#fff;
+}
+
+.new-game-button {
+	background-color: steelblue;
+}
+
+.join-game-button {
+	background-color: #4BC977;
+}
+
+.leave-game-button, .start-game-button, .reset-game-button {
+	height: 50px;
+	border-radius: 0px;
+}
+
+.lobby .start-game-button {
+	background-color: steelblue;
+	color: #fff;
+}
+
+.lobby .leave-game-button {
+	background-color: #B33E3E;
+	color: #fff;
+}
+
+.show-cards-button, .show-game-address-button {
+	background-color: inherit;
+	color: steelblue;
+	border: none;
+	cursor: pointer;
+}
+
+.fa.fa-mobile {
+	font-size: 24px;
+	vertical-align: middle;
+}
+
+.timer {
+	font-size: 24px;
+	color: #495357;
+}
+
+.timer .glyphicon:hover {
+	color: steelblue;
+}
+
+.time {
+	font-family: 'Exo', sans-serif;
+}
+
+.spacer {
+	height: 1px;
+}
+
+.margin-bottom {
+	margin-bottom: 20px;
+}
+
+.instructions {
+	font-family: 'Lora', serif;
+}
+
+.instructions h1, .instructions a {
+	font-family: 'Gotham Medium', serif;
+}
+
+.width-100 {
+	width: 100%;
+}
+
+.support-the-creators {
+	padding: 10px;
+	text-align: center;
+}
+
+.footer-text {
+	position: absolute;
+	padding: 10px;
+	text-align: center;
+	font-size: 9px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	overflow: hidden;
+}
+
+@media(min-width: 1200px) {
+	.new-game-button, .join-game-button {
+		margin-top: 35px;
+	}
+}
+
+@media(max-height: 500px) {
+	.footer-text{
+		display: none;
+	}
+}
