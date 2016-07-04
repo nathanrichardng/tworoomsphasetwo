@@ -22,7 +22,8 @@ class Lobby extends React.Component {
 			return (
 				<SelectName 
 					gameId={this.props.gameId}
-					accessCode={this.props.accessCode} />
+					accessCode={this.props.accessCode}
+					joinGame={this.props.joinGame} />
 			)
 		}
 	}
@@ -37,7 +38,8 @@ Lobby.propTypes = {
 	]),
 	accessCode: React.PropTypes.string,
 	leader: React.PropTypes.string,
-	players: React.PropTypes.array
+	players: React.PropTypes.array,
+	joinGame: React.PropTypes.func
 }
 
 export default Lobby;

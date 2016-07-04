@@ -5,6 +5,19 @@ class GamePage extends React.Component {
 
 	constructor() {
 		super();
+		this.joinGame = this.joinGame.bind(this);
+	}
+
+	joinGame(gameId, playerName) {
+		Meteor.call("joinGame", gameId, playerName, function(error, playerId) {
+			if(error) {
+			  	console.log("error joining game", error);
+			}
+			else {
+			  	Session.setPersistent("playerId", playerId);
+			  	console.log("Player Id", playerId);
+			}
+		});
 	}
 
 	render() {
@@ -16,7 +29,8 @@ class GamePage extends React.Component {
 					playerId={this.props.playerId}
 					leader={this.props.leader}
 					accessCode={this.props.accessCode}
-					players={this.props.players} />
+					players={this.props.players}
+					joinGame={this.joinGame} />
 			)
 		}
 	}

@@ -23,15 +23,7 @@ class SelectName extends React.Component {
 		var playerName = e.target.name.value;
 		console.log("game id", gameId);
 		console.log("player name", playerName);
-		Meteor.call("joinGame", gameId, playerName, function(error, playerId) {
-			if(error) {
-			  	console.log("error joining game", error);
-			}
-			else {
-			  	Session.setPersistent("playerId", playerId);
-			  	console.log("Player Id", playerId);
-			}
-		});
+		this.props.joinGame(gameId, playerName);
 	}
 
 	render() {
@@ -67,7 +59,8 @@ class SelectName extends React.Component {
 
 SelectName.propTypes = {
 	gameId: React.PropTypes.string,
-	accessCode: React.PropTypes.string
+	accessCode: React.PropTypes.string,
+	joinGame: React.PropTypes.func
 }
 
 export default SelectName;
