@@ -20,7 +20,7 @@ class SelectName extends React.Component {
 	joinGame(e) {
 		e.preventDefault();
 		var gameId = this.props.gameId;
-		var playerName = event.target.name.value;
+		var playerName = e.target.name.value;
 		console.log("game id", gameId);
 		console.log("player name", playerName);
 		Meteor.call("joinGame", gameId, playerName, function(error, playerId) {
@@ -51,7 +51,7 @@ class SelectName extends React.Component {
 							onClick={this.copyAccessCode} />
 					</div>
 				</div>
-				<form className="add-player-form">
+				<form className="add-player-form" onSubmit={this.joinGame}>
 					<div className="input-group">
 				      <input type="text" placeholder="Choose a name" name="name" className="form-control" autocomplete="off" />
 				      <span className="input-group-btn">

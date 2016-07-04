@@ -1,4 +1,13 @@
 /* CSS declarations go here */
+.selected {
+	background-color: steelblue;
+	color: #fff;
+}
+
+.selected .icon {
+	color: yellow;
+}
+
 .fa-bomb {
 	color: #C93C3C;
 }

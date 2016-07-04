@@ -12,9 +12,14 @@ function composer(props, onData) {
     console.log("id", props._id);
     const game = Games.findOne({_id: props._id});
     const players = Players.find({ game: props._id }).fetch();
+    const playerId = Session.get("playerId");
+
+    console.log("players", players);
+    console.log("playerId", playerId);
 
     const gameProps = {
       gameId: game._id,
+      playerId: playerId,
       players: players,
       stage: game.stage,
       leader: game.leader,

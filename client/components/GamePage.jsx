@@ -1,5 +1,5 @@
 import React from 'react';
-import SelectName from '../components/SelectName.jsx';
+import Lobby from '../components/Lobby.jsx';
 
 class GamePage extends React.Component {
 
@@ -11,9 +11,12 @@ class GamePage extends React.Component {
 		if(this.props.stage == "Lobby") {
 			return(
 				//change to lobby component later
-				<SelectName
+				<Lobby
 					gameId={this.props.gameId}
-					accessCode={this.props.accessCode} />
+					playerId={this.props.playerId}
+					leader={this.props.leader}
+					accessCode={this.props.accessCode}
+					players={this.props.players} />
 			)
 		}
 	}
@@ -21,15 +24,25 @@ class GamePage extends React.Component {
 
 GamePage.propTypes = {
 	gameId: React.PropTypes.string,
+	playerId: React.PropTypes.oneOfType([
+		React.PropTypes.string,
+		React.PropTypes.bool
+	]),
 	players: React.PropTypes.array,
 	stage: React.PropTypes.string,
 	leader: React.PropTypes.string,
 	accessCode: React.PropTypes.string,
 	deckList: React.PropTypes.array,
 	timerLength: React.PropTypes.number,
-	timerEndTime: React.PropTypes.date,
+	timerEndTime: React.PropTypes.oneOfType([
+		React.PropTypes.date,
+		React.PropTypes.bool
+	]),
 	timerPaused: React.PropTypes.bool,
-	timerPausedTime: React.PropTypes.date
+	timerPausedTime: React.PropTypes.oneOfType([
+		React.PropTypes.date,
+		React.PropTypes.bool
+	])
 }
 
 export default GamePage;
