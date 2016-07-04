@@ -46,7 +46,7 @@ class Home extends React.Component {
 		console.log(game);
 		if(game) {
 			var gameId = game._id;
-			//FlowRouter.go("/game/"+gameId);
+			FlowRouter.go("/game/"+gameId);
 			console.log("gameId", gameId);
 			/* uncomment once HOWL added
 			var Airhorn = new Howl({

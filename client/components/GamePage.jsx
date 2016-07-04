@@ -5,9 +5,8 @@ class GamePage extends React.Component {
 
 	constructor() {
 		super();
-		this.joinGame = this.joinGame.bind(this);
 	}
-
+	
 	joinGame(gameId, playerName) {
 		Meteor.call("joinGame", gameId, playerName, function(error, playerId) {
 			if(error) {
