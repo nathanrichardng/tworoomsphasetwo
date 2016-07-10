@@ -1,20 +1,11 @@
 import React from 'react';
+import AccessCode from '../components/AccessCode.jsx';
 
 class SelectName extends React.Component {
 
 	constructor() {
 		super();
 		this.joinGame = this.joinGame.bind(this);
-	}
-
-	copyAccessCode(e) {
-		e.preventDefault();
-		var urlField = document.getElementById('game-access-code');
-        // select the contents
-        urlField.setSelectionRange(0,9999);
-        if(document.queryCommandSupported("copy")) {
-          document.execCommand("copy");
-        }
 	}
 
 	joinGame(e) {
@@ -29,20 +20,8 @@ class SelectName extends React.Component {
 	render() {
 		return (
 			<div className="container">
-				<div className="row">
-					<h4>Access Code:</h4>
-					<div className="scroll-x well">
-						<input 
-							ref="accessCode"
-							type="text" 
-							className="form-control" 
-							id="game-access-code" 
-							name="gameAccessCode" 
-							readOnly="readonly"
-							value={this.props.accessCode} 
-							onClick={this.copyAccessCode} />
-					</div>
-				</div>
+				<AccessCode 
+					accessCode={this.props.accessCode} />
 				<form className="add-player-form" onSubmit={this.joinGame}>
 					<div className="input-group">
 				      <input type="text" placeholder="Choose a name" name="name" className="form-control" autocomplete="off" />

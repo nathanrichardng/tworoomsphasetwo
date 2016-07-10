@@ -6,13 +6,15 @@ function composer(props, onData) {
   console.log("rendering game page");
   const gameHandle = Meteor.subscribe("Games");
   const playerHandle = Meteor.subscribe("Players");
-  if(gameHandle.ready() && playerHandle.ready()) {
+  const cardHandle = Meteor.subscribe("Cards");
+  if(gameHandle.ready() && playerHandle.ready() && cardHandle.ready()) {
     console.log("handles ready");
     //properties to pass
     console.log("id", props._id);
     const game = Games.findOne({_id: props._id});
     const players = Players.find({ game: props._id }).fetch();
     const playerId = Session.get("playerId");
+    const cards = Cards.find().fetch();
 
     console.log("players", players);
     console.log("playerId", playerId);
@@ -24,6 +26,7 @@ function composer(props, onData) {
       stage: game.stage,
       leader: game.leader,
       accessCode: game.accessCode,
+      cards: cards,
       deckList: game.deckList,
       timerLength: game.timerLength,
       timerEndTime: game.timerEndTime,

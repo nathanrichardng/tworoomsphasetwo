@@ -4,6 +4,7 @@ class List extends React.Component {
 
 	constructor() {
 		super();
+		this.onClickItem = this.onClickItem.bind(this);
 	}
 
 	isSelected(item) {
@@ -17,11 +18,29 @@ class List extends React.Component {
 		return isSelected;
 	}
 
+	onClickItem(e) {
+		e.preventDefault();
+		if(this.props.onSelectItem) {
+			const index = e.target.dataset.index;
+			const item = this.props.items[index];
+			const selected = this.isSelected(item);
+			if(selected && this.props.onDeselectItem) {
+				this.props.onDeselectItem(item);
+			}
+			else {
+				this.props.onSelectItem(item);
+			}
+		}	
+	}
+
 	renderIcon(isSelected) {
 		const icon = this.props.selectedIcon
+		const iconStyle = {
+			pointerEvents: "none"
+		}
 		if(isSelected && icon) {
 			return (
-				<span className={icon}></span> 
+				<span className={icon} style={iconStyle}></span> 
 			)
 		}
 		else {
@@ -43,7 +62,7 @@ class List extends React.Component {
 		}
 		else {
 			return (
-				<li className={"list-group-item " + selectedClass} key={index}>
+				<li className={"list-group-item " + selectedClass} key={index} data-index={index} onClick={this.onClickItem}>
 					{display} {this.renderIcon(isSelected)}
 				</li>
 			)
@@ -75,6 +94,14 @@ List.propTypes = {
 	]),
 	path: React.PropTypes.oneOfType([
 		React.PropTypes.string,
+		React.PropTypes.bool
+	]),
+	onSelectItem: React.PropTypes.oneOfType([
+		React.PropTypes.func,
+		React.PropTypes.bool
+	]),
+	onDeselectItem: React.PropTypes.oneOfType([
+		React.PropTypes.func,
 		React.PropTypes.bool
 	]),
 	selectedValues: React.PropTypes.oneOfType([

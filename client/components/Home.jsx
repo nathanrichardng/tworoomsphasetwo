@@ -40,7 +40,7 @@ class Home extends React.Component {
 	}
 
 	joinGame(e) {
-		event.preventDefault();
+		e.preventDefault();
 		var accessCode = this.state.accessCode;
 		var game = Games.findOne({ accessCode: accessCode });
 		console.log(game);
@@ -76,13 +76,13 @@ class Home extends React.Component {
 	renderAccessCodeField() {
 		return (
 			<input 
-					type="text" 
-					ref="accessCode"
-					value={this.state.accessCode} 
-					className="form-control" 
-					placeholder="Enter access code" 
-					autocomplete="off" 
-					onChange={this.updateAccessCode} />
+				type="text" 
+				ref="accessCode"
+				value={this.state.accessCode} 
+				className="form-control" 
+				placeholder="Enter access code" 
+				autocomplete="off" 
+				onChange={this.updateAccessCode} />
 		)
 	}
 
@@ -96,7 +96,7 @@ class Home extends React.Component {
 
 	renderJoinGameButton() {
 		return(
-			<button className="col-xs-12 col-md-4 col-md-offset-4 button join-game-button" onClick={this.joinGame}>
+			<button className="col-xs-12 col-md-4 col-md-offset-4 button join-game-button">
 				Join Game
 			</button>
 		)
@@ -122,10 +122,11 @@ class Home extends React.Component {
 				  <img src="images/logo.svg" alt="" />
 				  <div className="pull-right"><a href="/instructions">How to play</a></div>
 				</div>
-				
-				{this.renderAccessCodeField()}
-				{this.renderErrorText()}
-				{this.renderSubmit()}
+				<form onSubmit={this.joinGame}>
+					{this.renderAccessCodeField()}
+					{this.renderErrorText()}
+					{this.renderSubmit()}
+				</form>
 				
 				<div className="support-the-creators col-xs-12 col-md-4 col-md-offset-4">
 					<div className="col-xs-12">

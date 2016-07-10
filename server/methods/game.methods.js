@@ -54,7 +54,7 @@ Meteor.methods({
     if (game.deckList.length + 2 >= game.players.length) {
       return "Not enough players";
     }
-    Games.update({ _id: gameId }, {
+    Games.update({ _id: gameId, leader: playerId }, {
       $addToSet: { deckList: cardId }
     });
     return cardId + " was added to DeckList by " + playerId;
@@ -62,7 +62,7 @@ Meteor.methods({
   'removeCardFromDeckList': function(playerId, cardId) {
     var player = Players.findOne({ _id: playerId });
     var gameId = player.game;
-    Games.update({ _id: gameId }, {
+    Games.update({ _id: gameId, leader: playerId }, {
       $pull: { deckList: cardId }
     });
     return cardId + " was removed from DeckList by " + playerId;
