@@ -1,5 +1,6 @@
 import React from 'react';
 import Lobby from '../components/Lobby.jsx';
+import InGame from '../components/InGame.jsx';
 
 class GamePage extends React.Component {
 
@@ -60,6 +61,15 @@ class GamePage extends React.Component {
 	startGame() {
 		//TODO implement startGame function
 		console.log("starting game");
+		const gameId = this.props.gameId;
+		Meteor.call("startGame", gameId, function(error, success) {
+	        if(error) {
+	          console.log("error starting game", error);
+	        }
+	        else {
+	          console.log("successfully started game", success);
+	        }
+	    })
 	}
 
 	leaveGame() {
@@ -80,6 +90,18 @@ class GamePage extends React.Component {
 		});
 	}
 
+	onStart() {
+		console.log("onstart");
+	}
+
+	onPause() {
+		console.log("onpause");
+	}
+
+	onReset() {
+		console.log("onReset");
+	}
+
 	render() {
 		const availableSlots = this.getAvailableSlots();
 		if(this.props.stage == "Lobby") {
@@ -98,6 +120,20 @@ class GamePage extends React.Component {
 					joinGame={this.joinGame}
 					startGame={this.startGame}
 					leaveGame={this.leaveGame} />
+			)
+		}
+		else {
+			const timerLengths= ["1 Minute", "3 Minutes", "5 Minutes"];
+			return (
+				<InGame 
+					playerId={this.props.playerId}
+					timeRemaining={this.props.timeRemaining}
+					paused={this.props.paused}
+					isLeader={this.props.isLeader}
+					onStart={this.props.onStart}
+					onPause={this.props.onPause}
+					onReset={this.props.onReset}
+					timerLengths={timerLengths} />
 			)
 		}
 	}

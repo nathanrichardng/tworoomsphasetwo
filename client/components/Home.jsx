@@ -20,6 +20,8 @@ class Home extends React.Component {
 
 	createGame(e) {
 		e.preventDefault();
+		//Consider refactoring this later to make sure players leave any current games on creating a new one.
+		Session.setPersistent("playerId", null)
 		Meteor.call("createGame" , function(error, gameId) {
 	        if(error) {
 	          	console.log("error creating game");
