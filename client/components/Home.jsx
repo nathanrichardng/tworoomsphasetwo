@@ -24,7 +24,7 @@ class Home extends React.Component {
 		Session.setPersistent("playerId", null)
 		Meteor.call("createGame" , function(error, gameId) {
 	        if(error) {
-	          	console.log("error creating game");
+	          	console.log("error creating game", error);
 	        }
 	        else {
 	        	console.log("gameId", gameId)

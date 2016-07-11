@@ -14,6 +14,10 @@ class GamePage extends React.Component {
 		this.joinGame = this.joinGame.bind(this);
 		this.startGame = this.startGame.bind(this);
 		this.leaveGame = this.leaveGame.bind(this);
+		this.onStart = this.onStart.bind(this);
+		this.onPause = this.onPause.bind(this);
+		this.onReset = this.onReset.bind(this);
+		this.onChangeTimerLength = this.onChangeTimerLength.bind(this);
 	}
 
 	getAvailableSlots() {
@@ -92,14 +96,44 @@ class GamePage extends React.Component {
 
 	onStart() {
 		console.log("onstart");
+		Meteor.call("startTimer", this.props.gameId, function(error, time) {
+	        console.log("start time", time);
+	    });
 	}
 
 	onPause() {
 		console.log("onpause");
+		Meteor.call("pauseTimer", this.props.gameId, function(error, time) {
+	        console.log("pause time", time);
+	    });
 	}
 
 	onReset() {
 		console.log("onReset");
+		Meteor.call("resetTimer", this.props.gameId, function(error, time) {
+	        console.log("reset time", time);
+	    });
+	}
+
+	onChangeTimerLength(time) {
+		console.log("onChangeTimerLength", time);
+		var timerLength;
+		switch(time) {
+			case "1 Minute":
+				timerLength = 1;
+				break;
+			case "3 Minutes":
+				timerLength = 3;
+				break;
+			case "5 Minutes":
+				timerLength = 5;
+				break;
+			default:
+				timerLength = time;
+		}
+		Meteor.call("setTimerLength", this.props.gameId, timerLength, function(error, success) {
+	        console.log("set timer length", success);
+	    });
 	}
 
 	render() {
@@ -127,12 +161,14 @@ class GamePage extends React.Component {
 			return (
 				<InGame 
 					playerId={this.props.playerId}
-					timeRemaining={this.props.timeRemaining}
-					paused={this.props.paused}
+					paused={this.props.timerPaused}
 					isLeader={this.props.isLeader}
-					onStart={this.props.onStart}
-					onPause={this.props.onPause}
-					onReset={this.props.onReset}
+					onStart={this.onStart}
+					onPause={this.onPause}
+					onReset={this.onReset}
+					timerEndTime={this.props.timerEndTime}
+					timerPausedTime={this.props.timerPausedTime}
+					onChangeTimerLength={this.onChangeTimerLength}
 					timerLengths={timerLengths} />
 			)
 		}

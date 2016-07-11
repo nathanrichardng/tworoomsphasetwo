@@ -86,6 +86,7 @@ Meteor.methods({
     dealer.dealCards();
     return "Cards Dealt";
 
+    //Implementation details
     function addCoreCards() {
       var president = Cards.findOne({ name: "President" })._id;
       var bomber = Cards.findOne({ name: "Bomber" })._id;
@@ -127,8 +128,10 @@ Meteor.methods({
     }
 
     function startGame() {
+      const now = moment().toDate();
+      const endTime = moment().add(3, "minutes").toDate();
       Games.update({ _id: gameId }, {
-        $set: { stage: "Round 1" }
+        $set: { stage: "Round 1", timerPaused: true, timerEndTime: endTime, timerPausedTime: now  }
       });
     }
 
