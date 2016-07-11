@@ -10,11 +10,14 @@ class InGame extends React.Component {
 			timeRemaining: "3:00"
 		}
 		this.getTimeRemaining = this.getTimeRemaining.bind(this);
+		this.returnToLobby = this.returnToLobby.bind(this);
+		this.leaveGame = this.leaveGame.bind(this);
 	}
 
 	componentDidMount() {
 		console.log("timerEndTime", this.props.timerEndTime);
 		console.log("timerPausedTime", this.props.timerPausedTime);
+		console.log("is leader", this.props.isLeader);
 		this.interval = setInterval(this.getTimeRemaining, 500);
 	}
 
@@ -35,11 +38,45 @@ class InGame extends React.Component {
 			const endTime = moment(this.props.timerEndTime);
 			const now = moment(TimeSync.serverTime(null, 500));
 			const timeDiff = endTime.diff(now);
+			if (timeDiff < 0 && timeDiff > -1000) {
+		        var Airhorn = new Howl({
+		          src: ['/sounds/airhorn.mp3']
+		        });
+		        Airhorn.play(); 
+		    }
 			const timeRemaining = timeDiff > 0 ? moment(timeDiff).format("m:ss") : "Times up!";
-			console.log("return time", timeRemaining);
 			this.setState({ timeRemaining: timeRemaining });
 			return timeRemaining;
 		}
+	}
+
+	leaveGame(e) {
+		e.preventDefault();
+		this.props.leaveGame();
+	}
+
+	returnToLobby(e) {
+		e.preventDefault();
+		this.props.returnToLobby();
+	}
+
+	renderButtons() {
+		if(this.props.isLeader) {
+			return (
+				<div>
+					<button className="button col-md-4 col-xs-12" onClick={this.returnToLobby}>
+						Return to Lobby
+					</button>
+				</div>
+			)
+		}
+		else {
+			return (
+				<button className="button col-md-4 col-xs-12" onClick={this.leaveGame}>
+					Leave Game
+				</button>
+			)
+		}	
 	}
 
 	render() {
@@ -56,6 +93,7 @@ class InGame extends React.Component {
 					timerLengths={this.props.timerLengths}
 					onChangeTimerLength={this.props.onChangeTimerLength} />
 				<PlayerCardContainer playerId={this.props.playerId} />
+				{this.renderButtons()}
 			</div>
 		)
 	}
@@ -72,7 +110,9 @@ InGame.propTypes = {
 	timerLengths: React.PropTypes.array,
 	onChangeTimerLength: React.PropTypes.func,
 	timerEndTime: React.PropTypes.object,
-	timerPausedTime: React.PropTypes.object
+	timerPausedTime: React.PropTypes.object,
+	leaveGame: React.PropTypes.func,
+	returnToLobby: React.PropTypes.func
 }
 
 export default InGame;

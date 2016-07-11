@@ -29,14 +29,12 @@ class Home extends React.Component {
 	        else {
 	        	console.log("gameId", gameId)
 				FlowRouter.go("/game/"+gameId);
-				/* add this with howl later
-				var Airhorn = new Howl({
-				src: ['/sounds/airhorn.mp3'],
-				volume: 0.0
+				const Airhorn = new Howl({
+					src: ['/sounds/airhorn.mp3'],
+					volume: 0.0
 				});
 				Airhorn.mute();
 				Airhorn.play(); 
-				*/
 	        }
 	    });
 	}
@@ -50,13 +48,11 @@ class Home extends React.Component {
 			var gameId = game._id;
 			FlowRouter.go("/game/"+gameId);
 			console.log("gameId", gameId);
-			/* uncomment once HOWL added
 			var Airhorn = new Howl({
 			  src: ['/sounds/airhorn.mp3'],
 			  volume: 0.0
 			});
 			Airhorn.play(); 
-			*/
 		}
 		else {
 			this.refs.accessCode.focus();

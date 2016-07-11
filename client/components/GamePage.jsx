@@ -14,6 +14,7 @@ class GamePage extends React.Component {
 		this.joinGame = this.joinGame.bind(this);
 		this.startGame = this.startGame.bind(this);
 		this.leaveGame = this.leaveGame.bind(this);
+		this.returnToLobby = this.returnToLobby.bind(this);
 		this.onStart = this.onStart.bind(this);
 		this.onPause = this.onPause.bind(this);
 		this.onReset = this.onReset.bind(this);
@@ -63,7 +64,6 @@ class GamePage extends React.Component {
 	}
 
 	startGame() {
-		//TODO implement startGame function
 		console.log("starting game");
 		const gameId = this.props.gameId;
 		Meteor.call("startGame", gameId, function(error, success) {
@@ -92,6 +92,19 @@ class GamePage extends React.Component {
 			  FlowRouter.go("/");
 			}
 		});
+	}
+
+	returnToLobby() {
+		console.log("return to lobby");
+		const gameId = this.props.gameId;
+		Meteor.call("resetGame", gameId, function(error, success) {
+	        if(error) {
+	          console.log("error restarting game", error);
+	        }
+	        else {
+	          console.log("successfully restarted game", success);
+	        }
+	    })
 	}
 
 	onStart() {
@@ -156,20 +169,34 @@ class GamePage extends React.Component {
 					leaveGame={this.leaveGame} />
 			)
 		}
-		else {
+		else if(this.props.playerId) {
 			const timerLengths= ["1 Minute", "3 Minutes", "5 Minutes"];
+			const isLeader = (this.props.playerId == this.props.leader)
 			return (
 				<InGame 
 					playerId={this.props.playerId}
 					paused={this.props.timerPaused}
-					isLeader={this.props.isLeader}
+					isLeader={isLeader}
 					onStart={this.onStart}
 					onPause={this.onPause}
 					onReset={this.onReset}
 					timerEndTime={this.props.timerEndTime}
 					timerPausedTime={this.props.timerPausedTime}
 					onChangeTimerLength={this.onChangeTimerLength}
-					timerLengths={timerLengths} />
+					timerLengths={timerLengths}
+					leaveGame={this.leaveGame}
+					returnToLobby={this.returnToLobby} />
+			)
+		}
+		else {
+			return (
+				<div className="container">
+					<div className="jumbotron">
+					  <h1>You don't have a card!</h1>
+					  <p>Looks like your friends started without you.</p>
+					  <p>You should probably go yell at them to remake the game or something.</p>
+					</div>
+				</div>
 			)
 		}
 	}
