@@ -95,12 +95,19 @@ class Timer extends React.Component {
 	}
 
 	render() {
+		const timerStyle = {
+			fontSize: "24px",
+			color: "#495357",
+			marginBottom: "16px"
+		}
 		return (
 			<div>
-				<span className="col-xs-6 time">{this.props.timeRemaining}</span>
-				{this.renderPlayButton()}
-				{this.renderResetButton()}
-				{this.renderChangeTimerButton()}
+				<div className="col-xs-12 col-md-4" style={timerStyle}>
+					<span className="col-xs-6 time">{this.props.timeRemaining}</span>
+					{this.renderPlayButton()}
+					{this.renderResetButton()}
+					{this.renderChangeTimerButton()}
+				</div>
 			</div>
 		)
 	}

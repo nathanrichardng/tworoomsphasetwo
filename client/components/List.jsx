@@ -51,7 +51,9 @@ class List extends React.Component {
 	renderItem(item, index) {
 		const display = this.props.displayProperty ? item[this.props.displayProperty] : item;
 		const isSelected = this.isSelected(item);
-		const selectedClass = isSelected ? "selected" : "";
+		const selectedClassName = this.props.selectedClass ? this.props.selectedClass : "selected";
+		const notSelectedClassName = this.props.onlyShowSelected ? "hidden" : "";
+		const selectedClass = isSelected ? selectedClassName : notSelectedClassName;
 		if(this.props.path) {
 			const href = FlowRouter.path(this.props.path + "/" + item._id);
 			return (
@@ -115,7 +117,12 @@ List.propTypes = {
 	selectedIcon: React.PropTypes.oneOfType([
 		React.PropTypes.string,
 		React.PropTypes.bool
-	])
+	]),
+	selectedClass: React.PropTypes.oneOfType([
+		React.PropTypes.string,
+		React.PropTypes.bool
+	]),
+	onlyShowSelected: React.PropTypes.bool
 }
 
 export default List;

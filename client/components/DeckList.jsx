@@ -7,6 +7,10 @@ class DeckList extends React.Component {
 		super();
 		this.selectCard = this.selectCard.bind(this);
 		this.deselectCard = this.deselectCard.bind(this);
+		this.listStyle = {
+			maxHeight: "300px",
+			overflow: "scroll"
+		}
 	}
 
 	selectCard(card) {
@@ -21,14 +25,16 @@ class DeckList extends React.Component {
 		return (
 			<div>
 				<h3>Select Cards: {this.props.availableSlots}</h3>
-				<List 
-					items={this.props.cards}
-					displayProperty="name"
-					onSelectItem={this.selectCard}
-					onDeselectItem={this.deselectCard}
-					selectedValues={this.props.selectedCards}
-					selectedProperty="_id"
-					selectedIcon="glyphicon glyphicon-ok icon" />
+				<div style={this.listStyle}>
+					<List 
+						items={this.props.cards}
+						displayProperty="name"
+						onSelectItem={this.selectCard}
+						onDeselectItem={this.deselectCard}
+						selectedValues={this.props.selectedCards}
+						selectedProperty="_id"
+						selectedIcon="glyphicon glyphicon-ok icon" />
+				</div>
 			</div>
 		)
 	}
@@ -36,9 +42,9 @@ class DeckList extends React.Component {
 	render() {
 		return(
 			<div>
-				<div className="col-xs-12 ">
-					<span data-toggle="modal" data-target="#cards-list-modal" className="pull-right show-cards-button">
-					  <span className="glyphicon glyphicon-plus"></span> Cards
+				<div>
+					<span data-toggle="modal" data-target="#cards-list-modal" className="show-cards-button">
+					  {this.props.children}
 					</span>
 				</div>
 				<div className="modal fade" tabindex="-1" role="dialog" id="cards-list-modal">

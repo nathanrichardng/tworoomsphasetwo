@@ -64,7 +64,7 @@ class InGame extends React.Component {
 		if(this.props.isLeader) {
 			return (
 				<div>
-					<button className="button col-md-4 col-xs-12" onClick={this.returnToLobby}>
+					<button className="button reset-game-button col-md-4 col-xs-12" onClick={this.returnToLobby}>
 						Return to Lobby
 					</button>
 				</div>
@@ -72,7 +72,7 @@ class InGame extends React.Component {
 		}
 		else {
 			return (
-				<button className="button col-md-4 col-xs-12" onClick={this.leaveGame}>
+				<button className="button leave-game-button col-md-4 col-xs-12" onClick={this.leaveGame}>
 					Leave Game
 				</button>
 			)

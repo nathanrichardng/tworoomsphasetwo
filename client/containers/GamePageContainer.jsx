@@ -14,7 +14,7 @@ function composer(props, onData) {
     const game = Games.findOne({_id: props._id});
     const players = Players.find({ game: props._id }).fetch();
     const playerId = Session.get("playerId");
-    const cards = Cards.find().fetch();
+    const cards = Cards.find({ name: { $nin: ["President", "Bomber", "Blue Team", "Red Team"] } }).fetch();
 
     console.log("players", players);
     console.log("playerId", playerId);

@@ -1,8 +1,9 @@
 import React from 'react';
-import AccessCode from '../components/AccessCode.jsx';
+import MenuBar from '../components/MenuBar.jsx';
+import AccessCodeModal from '../components/AccessCodeModal.jsx';
 import PlayerList from '../components/PlayerList.jsx';
 import SelectName from '../components/SelectName.jsx';
-import DeckList from '../components/DeckList.jsx';
+import CardList from '../components/CardList.jsx';
 
 class Lobby extends React.Component {
 
@@ -50,16 +51,20 @@ class Lobby extends React.Component {
 		if(this.props.playerId) {
 			return (
 				<div className="container lobby">
-					<AccessCode accessCode={this.props.accessCode} />
-					<DeckList
-						availableSlots={this.props.availableSlots}
-						cards={this.props.cards}
-						selectedCards={this.props.selectedCards}
-						selectCard={this.props.selectCard}
-						deselectCard={this.props.deselectCard} />
+					<AccessCodeModal
+						accessCode={this.props.accessCode}>
+
+						<span className="glyphicon glyphicon-phone"></span> Access Code
+					</AccessCodeModal>
 					<PlayerList
 						players={this.props.players}
 						leader={this.props.leader} />
+					<CardList
+							availableSlots={this.props.availableSlots}
+							cards={this.props.cards}
+							selectedCards={this.props.selectedCards}
+							selectCard={this.props.selectCard}
+							deselectCard={this.props.deselectCard} />
 					{this.renderButtons()}
 				</div>
 			)
