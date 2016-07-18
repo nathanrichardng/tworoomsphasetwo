@@ -3,6 +3,7 @@ import {mount} from 'react-mounter';
 // load Layout and Welcome React components
 import {Layout, Welcome} from './app.jsx';
 import Home from './components/Home.jsx';
+import Instructions from './components/Instructions.jsx';
 import CardListContainer from './containers/CardListContainer.jsx';
 import CardContainer from './containers/CardContainer.jsx';
 import GamePageContainer from './containers/GamePageContainer.jsx';
@@ -11,6 +12,14 @@ FlowRouter.route("/", {
   action() {
     mount(Layout, {
         content: (<Home />)
+    });
+  }
+});
+
+FlowRouter.route("/instructions", {
+  action() {
+    mount(Layout, {
+        content: (<Instructions />)
     });
   }
 });

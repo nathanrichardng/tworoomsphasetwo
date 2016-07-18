@@ -1,15 +1,15 @@
 /* CSS declarations go here */
 .selected {
-	background-color: steelblue;
+	background-color: #064F7C;
 	color: #fff;
 }
 
 .selected .icon {
-	color: yellow;
+	color: #F2DC02;
 }
 
 .fa-bomb {
-	color: #C93C3C;
+	color: #D23434;
 }
 
 .spinner-holder {
@@ -130,7 +130,7 @@
 }
 
 .new-game-button {
-	background-color: steelblue;
+	background-color: #064F7C;
 }
 
 .join-game-button {
@@ -143,12 +143,12 @@
 }
 
 .lobby .start-game-button {
-	background-color: steelblue;
+	background-color: #064F7C;
 	color: #fff;
 }
 
 .lobby .leave-game-button {
-	background-color: #B33E3E;
+	background-color: #D23434;
 	color: #fff;
 }
 

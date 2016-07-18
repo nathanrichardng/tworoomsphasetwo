@@ -4,7 +4,7 @@ import InGame from '../components/InGame.jsx';
 
 class GamePage extends React.Component {
 
-	//TODO: add deck list component
+	//TODO: change game logic so that leader is just the first player in game.players array.
 
 	constructor() {
 		super();

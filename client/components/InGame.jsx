@@ -91,7 +91,8 @@ class InGame extends React.Component {
 					onPause={this.props.onPause}
 					onReset={this.props.onReset}
 					timerLengths={this.props.timerLengths}
-					onChangeTimerLength={this.props.onChangeTimerLength} />
+					onChangeTimerLength={this.props.onChangeTimerLength}
+					showControls={this.props.isLeader} />
 				<PlayerCardContainer playerId={this.props.playerId} />
 				{this.renderButtons()}
 			</div>

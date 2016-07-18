@@ -1,5 +1,4 @@
 import React from 'react';
-import MenuBar from '../components/MenuBar.jsx';
 import AccessCodeModal from '../components/AccessCodeModal.jsx';
 import PlayerList from '../components/PlayerList.jsx';
 import SelectName from '../components/SelectName.jsx';

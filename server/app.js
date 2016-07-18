@@ -102,7 +102,7 @@ Meteor.startup(() => {
 
 	    var engineer = {
 	      name: "Engineer",
-	      description: "You're smart. You pretty much designed the bomb that will blow the president up. Only..you forgot to tell the Bomber how to turn the darn thing on! Share cards with the Bomber before the game ends, or the Red team loses!",
+	      description: "You're smart. You pretty much designed the bomb that will blow the president up. Only...you forgot to tell the Bomber how to turn the darn thing on! Share cards with the Bomber before the game ends, or the Red team loses!",
 	      team: "Red",
 	      core: false
 	    }

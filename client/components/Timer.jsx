@@ -94,6 +94,21 @@ class Timer extends React.Component {
 		)
 	}
 
+	renderControls() {
+		if(this.props.showControls) {
+			return (
+				<span>
+					{this.renderPlayButton()}
+					{this.renderResetButton()}
+					{this.renderChangeTimerButton()}
+				</span>
+			)
+		}
+		else {
+			return false;
+		}
+	}
+
 	render() {
 		const timerStyle = {
 			fontSize: "24px",
@@ -104,9 +119,7 @@ class Timer extends React.Component {
 			<div>
 				<div className="col-xs-12 col-md-4" style={timerStyle}>
 					<span className="col-xs-6 time">{this.props.timeRemaining}</span>
-					{this.renderPlayButton()}
-					{this.renderResetButton()}
-					{this.renderChangeTimerButton()}
+					{this.renderControls()}
 				</div>
 			</div>
 		)
@@ -121,7 +134,8 @@ Timer.propTypes = {
 	onPause: React.PropTypes.func,
 	onReset: React.PropTypes.func,
 	timerLengths: React.PropTypes.array,
-	onChangeTimerLength: React.PropTypes.func
+	onChangeTimerLength: React.PropTypes.func,
+	showControls: React.PropTypes.bool
 }
 
 export default Timer;
