@@ -62,8 +62,7 @@ class Lobby extends React.Component {
 							availableSlots={this.props.availableSlots}
 							cards={this.props.cards}
 							selectedCards={this.props.selectedCards}
-							selectCard={this.props.selectCard}
-							deselectCard={this.props.deselectCard} />
+							updateDeckList={this.props.updateDeckList} />
 					{this.renderButtons()}
 				</div>
 			)
@@ -90,8 +89,7 @@ Lobby.propTypes = {
 	availableSlots: React.PropTypes.number,
 	cards: React.PropTypes.array,
 	selectedCards: React.PropTypes.array,
-	selectCard: React.PropTypes.func,
-	deselectCard: React.PropTypes.func,
+	updateDeckList: React.PropTypes.func,
 	leader: React.PropTypes.string,
 	players: React.PropTypes.array,
 	joinGame: React.PropTypes.func,

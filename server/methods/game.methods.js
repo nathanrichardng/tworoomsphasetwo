@@ -59,6 +59,18 @@ Meteor.methods({
     });
     return cardId + " was added to DeckList by " + playerId;
   },
+  'updateDeckList': function(playerId, newDeckList) {
+    var player = Players.findOne({ _id: playerId });
+    var gameId = player.game;
+    var game = Games.findOne({ _id: gameId });
+    if (newDeckList.length + 2 > game.players.length) {
+      return "Not enough players";
+    }
+    Games.update({ _id: gameId, leader: playerId }, {
+      $set: { deckList: newDeckList }
+    });
+    return "DeckList was updated to " + newDeckList + " by " + playerId;
+  },
   'removeCardFromDeckList': function(playerId, cardId) {
     var player = Players.findOne({ _id: playerId });
     var gameId = player.game;

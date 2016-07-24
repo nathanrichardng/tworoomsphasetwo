@@ -24,7 +24,7 @@ class SelectName extends React.Component {
 					accessCode={this.props.accessCode} />
 				<form className="add-player-form" onSubmit={this.joinGame}>
 					<div className="input-group">
-				      <input type="text" placeholder="Choose a name" name="name" className="form-control" autocomplete="off" />
+				      <input type="text" placeholder="Choose a name" name="name" className="form-control" autoComplete="off" />
 				      <span className="input-group-btn">
 				        <input className="btn btn-default" type="submit" value="Join Lobby" />
 				      </span>

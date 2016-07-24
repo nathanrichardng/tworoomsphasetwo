@@ -14,6 +14,7 @@ function composer(props, onData) {
     const game = Games.findOne({_id: props._id});
     const players = Players.find({ game: props._id }).fetch();
     const playerId = Session.get("playerId");
+    //exclude these cards so players cant manipulate them. They will be added in by server side methods.
     const cards = Cards.find({ name: { $nin: ["President", "Bomber", "Blue Team", "Red Team"] } }).fetch();
 
     console.log("players", players);

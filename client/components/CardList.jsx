@@ -19,6 +19,17 @@ class CardList extends React.Component {
 		}
 	}
 
+	renderWarning() {
+		if(this.props.availableSlots < 0) {
+			const warningStyle = {
+				color: "#D23434"
+			}
+			return (
+				<h4 style={warningStyle}>Not enough players for the selected cards.</h4>
+			)
+		}
+	}
+
 	render() {
 		const president = {
 			name: "President",
@@ -49,13 +60,13 @@ class CardList extends React.Component {
 							availableSlots={this.props.availableSlots}
 							cards={this.props.cards}
 							selectedCards={this.props.selectedCards}
-							selectCard={this.props.selectCard}
-							deselectCard={this.props.deselectCard}>
+							updateDeckList={this.props.updateDeckList}>
 
 							<span className="glyphicon glyphicon-plus"></span>
 						</DeckList>
 					</div>
 				</div>
+				{this.renderWarning()}
 				<List 
 					items={cards}
 					displayProperty="name"
@@ -73,8 +84,7 @@ CardList.propTypes = {
 	availableSlots: React.PropTypes.number,
 	cards: React.PropTypes.array,
 	selectedCards: React.PropTypes.array,
-	selectCard: React.PropTypes.func,
-	deselectCard: React.PropTypes.func
+	updateDeckList: React.PropTypes.func
 }
 
 export default CardList;

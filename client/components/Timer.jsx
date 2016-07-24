@@ -67,8 +67,8 @@ class Timer extends React.Component {
 	    ));
 		return (
 			<div>
-				<span data-toggle="modal" data-target="#set-timer-modal" className="glyphicon glyphicon-time col-xs-2"></span>
-				<div className="modal fade" tabindex="-1" role="dialog" id="set-timer-modal">
+				<span data-toggle="modal" data-target="#set-timer-modal" className="glyphicon glyphicon-time set-timer col-xs-2"></span>
+				<div className="modal fade" tabIndex="-1" role="dialog" id="set-timer-modal">
 				  <div className="modal-dialog">
 				    <div className="modal-content">
 				      <div className="modal-header">

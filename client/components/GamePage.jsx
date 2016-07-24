@@ -11,6 +11,7 @@ class GamePage extends React.Component {
 		this.getAvailableSlots = this.getAvailableSlots.bind(this);
 		this.selectCard = this.selectCard.bind(this);
 		this.deselectCard = this.deselectCard.bind(this);
+		this.updateDeckList = this.updateDeckList.bind(this);
 		this.joinGame = this.joinGame.bind(this);
 		this.startGame = this.startGame.bind(this);
 		this.leaveGame = this.leaveGame.bind(this);
@@ -25,8 +26,23 @@ class GamePage extends React.Component {
 		const numPlayers = this.props.players.length;
 		const numCardsSelected = this.props.deckList.length;
 		const numCardsAvailable = numPlayers - numCardsSelected - 2;
-		if(numCardsAvailable > 0) { return numCardsAvailable; }
-		else { return 0; }
+		return numCardsAvailable;
+	}
+
+	updateDeckList(newCards) {
+		const playerId = this.props.playerId;
+		const isLeader = (playerId === this.props.leader);
+		if(isLeader){
+			console.log("updating decklist", newCards);
+			Meteor.call("updateDeckList", playerId, newCards, function(error, result) {
+	          if(result === "Not enough players") {
+	            console.log("Not enough players");
+	          }
+	        });
+		}
+		else {
+			console.log("Unable to add cards.");
+		}
 	}
 
 	selectCard(card) {
@@ -161,8 +177,7 @@ class GamePage extends React.Component {
 					availableSlots={availableSlots}
 					cards={this.props.cards}
 					selectedCards={this.props.deckList}
-					selectCard={this.selectCard}
-					deselectCard={this.deselectCard}
+					updateDeckList={this.updateDeckList}
 					players={this.props.players}
 					joinGame={this.joinGame}
 					startGame={this.startGame}

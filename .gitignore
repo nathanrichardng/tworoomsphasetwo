@@ -1,1 +1,4 @@
 node_modules/
+mup.json
+settings.json
+server/kadira.js

@@ -79,7 +79,7 @@ class Home extends React.Component {
 				value={this.state.accessCode} 
 				className="form-control" 
 				placeholder="Enter access code" 
-				autocomplete="off" 
+				autoComplete="off" 
 				onChange={this.updateAccessCode} />
 		)
 	}

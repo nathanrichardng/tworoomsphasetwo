@@ -169,7 +169,7 @@
 	color: #495357;
 }
 
-.timer .glyphicon:hover {
+.start-timer:hover, .pause-timer:hover, .reset-timer:hover, .set-timer:hover {
 	color: steelblue;
 }
 

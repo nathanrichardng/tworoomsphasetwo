@@ -16,6 +16,10 @@ class AccessCodeModal extends React.Component {
         }
 	}
 
+	componentWillUnmount() {
+		$('#access-code-modal').modal('hide');
+	}
+
 	render() {
 		return(
 			<div>
@@ -24,7 +28,7 @@ class AccessCodeModal extends React.Component {
 					  {this.props.children}
 					</span>
 				</div>
-				<div className="modal fade" tabindex="-1" role="dialog" id="access-code-modal">
+				<div className="modal fade" tabIndex="-1" role="dialog" id="access-code-modal">
 				  <div className="modal-dialog">
 				    <div className="modal-content">
 				      <div className="modal-header">
@@ -45,7 +49,7 @@ class AccessCodeModal extends React.Component {
 						</div>
 				      </div>
 				      <div className="modal-footer">
-				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
 				      </div>
 				    </div>
 				  </div>
