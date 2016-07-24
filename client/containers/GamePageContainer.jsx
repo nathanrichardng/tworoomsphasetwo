@@ -25,7 +25,7 @@ function composer(props, onData) {
       playerId: playerId,
       players: players,
       stage: game.stage,
-      leader: game.leader,
+      leader: game.players[0],
       accessCode: game.accessCode,
       cards: cards,
       deckList: game.deckList,

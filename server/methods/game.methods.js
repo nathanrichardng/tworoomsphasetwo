@@ -9,17 +9,9 @@ Meteor.methods({
   'joinGame': function(gameId, playerName) {
     var playerId = Players.insert({ game: gameId, name: playerName});
     var game = Games.findOne({ _id: gameId });
-    if (game.leader) {
-      Games.update({ _id: gameId, stage: "Lobby" }, {
-        $addToSet: { players: playerId }
-      });
-    }
-    else {
-      Games.update({ _id: gameId, stage: "Lobby" }, {
-        $addToSet: { players: playerId },
-        $set: { leader: playerId }
-      });
-    }
+    Games.update({ _id: gameId, stage: "Lobby" }, {
+      $addToSet: { players: playerId }
+    });
     
     return playerId;
   },
@@ -54,7 +46,10 @@ Meteor.methods({
     if (game.deckList.length + 2 >= game.players.length) {
       return "Not enough players";
     }
-    Games.update({ _id: gameId, leader: playerId }, {
+    if (!game.players[0] == playerId) {
+      return "You are not the leader."
+    }
+    Games.update({ _id: gameId }, {
       $addToSet: { deckList: cardId }
     });
     return cardId + " was added to DeckList by " + playerId;
@@ -66,7 +61,10 @@ Meteor.methods({
     if (newDeckList.length + 2 > game.players.length) {
       return "Not enough players";
     }
-    Games.update({ _id: gameId, leader: playerId }, {
+    if (!game.players[0] == playerId) {
+      return "You are not the leader."
+    }
+    Games.update({ _id: gameId }, {
       $set: { deckList: newDeckList }
     });
     return "DeckList was updated to " + newDeckList + " by " + playerId;
@@ -74,7 +72,10 @@ Meteor.methods({
   'removeCardFromDeckList': function(playerId, cardId) {
     var player = Players.findOne({ _id: playerId });
     var gameId = player.game;
-    Games.update({ _id: gameId, leader: playerId }, {
+    if (!game.players[0] == playerId) {
+      return "You are not the leader."
+    }
+    Games.update({ _id: gameId }, {
       $pull: { deckList: cardId }
     });
     return cardId + " was removed from DeckList by " + playerId;

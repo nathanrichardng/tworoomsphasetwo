@@ -47,6 +47,7 @@ class Lobby extends React.Component {
 	render() {
 		console.log("players", this.props.players);
 		console.log("playerId", this.props.playerId);
+		const isLeader = (this.props.leader == this.props.playerId);
 		if(this.props.playerId) {
 			return (
 				<div className="container lobby">
@@ -60,6 +61,7 @@ class Lobby extends React.Component {
 						leader={this.props.leader} />
 					<CardList
 							availableSlots={this.props.availableSlots}
+							isLeader={isLeader}
 							cards={this.props.cards}
 							selectedCards={this.props.selectedCards}
 							updateDeckList={this.props.updateDeckList} />

@@ -30,6 +30,23 @@ class CardList extends React.Component {
 		}
 	}
 
+	renderDeckListModal() {
+		if(this.props.isLeader) {
+			return (
+				<div style={this.deckListStyle}>
+					<DeckList
+						availableSlots={this.props.availableSlots}
+						cards={this.props.cards}
+						selectedCards={this.props.selectedCards}
+						updateDeckList={this.props.updateDeckList}>
+
+						<span className="glyphicon glyphicon-plus"></span>
+					</DeckList>
+				</div>
+			)
+		}
+	}
+
 	render() {
 		const president = {
 			name: "President",
@@ -55,16 +72,7 @@ class CardList extends React.Component {
 					<h3 style={this.headerStyle}>
 						Cards 
 					</h3>
-					<div style={this.deckListStyle}>
-						<DeckList
-							availableSlots={this.props.availableSlots}
-							cards={this.props.cards}
-							selectedCards={this.props.selectedCards}
-							updateDeckList={this.props.updateDeckList}>
-
-							<span className="glyphicon glyphicon-plus"></span>
-						</DeckList>
-					</div>
+					{this.renderDeckListModal()}
 				</div>
 				{this.renderWarning()}
 				<List 
@@ -83,6 +91,7 @@ class CardList extends React.Component {
 CardList.propTypes = {
 	availableSlots: React.PropTypes.number,
 	cards: React.PropTypes.array,
+	isLeader: React.PropTypes.bool,
 	selectedCards: React.PropTypes.array,
 	updateDeckList: React.PropTypes.func
 }

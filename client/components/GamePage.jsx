@@ -4,8 +4,6 @@ import InGame from '../components/InGame.jsx';
 
 class GamePage extends React.Component {
 
-	//TODO: change game logic so that leader is just the first player in game.players array.
-
 	constructor() {
 		super();
 		this.getAvailableSlots = this.getAvailableSlots.bind(this);
