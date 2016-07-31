@@ -20,7 +20,7 @@ class CardList extends React.Component {
 	}
 
 	renderWarning() {
-		if(this.props.availableSlots < 0) {
+		if(this.props.showWarning) {
 			const warningStyle = {
 				color: "#D23434"
 			}
@@ -35,7 +35,6 @@ class CardList extends React.Component {
 			return (
 				<div style={this.deckListStyle}>
 					<DeckList
-						availableSlots={this.props.availableSlots}
 						cards={this.props.cards}
 						selectedCards={this.props.selectedCards}
 						updateDeckList={this.props.updateDeckList}>
@@ -89,7 +88,7 @@ class CardList extends React.Component {
 }
 
 CardList.propTypes = {
-	availableSlots: React.PropTypes.number,
+	showWarning: React.PropTypes.bool,
 	cards: React.PropTypes.array,
 	isLeader: React.PropTypes.bool,
 	selectedCards: React.PropTypes.array,

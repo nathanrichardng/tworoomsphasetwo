@@ -6,10 +6,8 @@ class DeckList extends React.Component {
 	constructor(props) {
 		super();
 		const selectedCards = props.selectedCards ? props.selectedCards : [];
-		const availableSlots = props.availableSlots ? props.availableSlots : 0;
 		this.state = {
-			selectedCards: selectedCards,
-			availableSlots: availableSlots
+			selectedCards: selectedCards
 		};
 		this.selectCard = this.selectCard.bind(this);
 		this.deselectCard = this.deselectCard.bind(this);
@@ -22,29 +20,22 @@ class DeckList extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
 		console.log(nextProps);
-		this.setState({ selectedCards: nextProps.selectedCards, availableSlots: nextProps.availableSlots });
+		this.setState({ selectedCards: nextProps.selectedCards });
 	}
 
 	selectCard(card) {
-		//exit if no slots available
-		const availableSlots = this.state.availableSlots;
-		const newSlots = availableSlots - 1;
-		if(newSlots < 0) { return false; }
-		//otherwise add card and update state
 		const selectedCards = this.state.selectedCards;
 			  selectedCards.push(card._id);
 			  console.log("selectedCards", selectedCards);
-		this.setState({ selectedCards: selectedCards, availableSlots: newSlots });
+		this.setState({ selectedCards: selectedCards });
 	}
 
 	deselectCard(card) {
-		const availableSlots = this.state.availableSlots;
-		const newSlots = availableSlots + 1;
 		const selectedCards = this.state.selectedCards;
 		const index = selectedCards.indexOf(card._id);
 		selectedCards.splice(index, 1);
 		console.log("selectedCards", selectedCards);
-		this.setState({ selectedCards: selectedCards, availableSlots: newSlots });
+		this.setState({ selectedCards: selectedCards });
 	}
 
 	updateDeckList(e) {
@@ -61,7 +52,7 @@ class DeckList extends React.Component {
 	renderCardList() {
 		return (
 			<div>
-				<h3>Available slots: {this.state.availableSlots}</h3>
+				<h3>Players Required: {this.state.selectedCards.length + 2}</h3>
 				<div style={this.listStyle}>
 					<List 
 						items={this.props.cards}
@@ -108,7 +99,6 @@ class DeckList extends React.Component {
 }
 
 DeckList.propTypes = {
-	availableSlots: React.PropTypes.number,
 	cards: React.PropTypes.array,
 	selectedCards: React.PropTypes.array,
 	updateDeckList: React.PropTypes.func

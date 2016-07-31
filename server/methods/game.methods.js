@@ -58,9 +58,11 @@ Meteor.methods({
     var player = Players.findOne({ _id: playerId });
     var gameId = player.game;
     var game = Games.findOne({ _id: gameId });
+    /* 
     if (newDeckList.length + 2 > game.players.length) {
       return "Not enough players";
     }
+    */
     if (!game.players[0] == playerId) {
       return "You are not the leader."
     }
@@ -82,6 +84,12 @@ Meteor.methods({
   },
   'startGame': function(gameId) {
     var game = Games.findOne({ _id: gameId });
+    var numCards = game.deckList.length;
+    var numPlayers = game.players.length;
+    if(numCards + 2 > numPlayers) {
+      return "Not enough players";
+    }
+    //otherwise deal the cards and start the game
     var players = Players.find({ game: gameId }).fetch();
 
     var dealer = {

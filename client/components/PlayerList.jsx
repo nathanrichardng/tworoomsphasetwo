@@ -25,7 +25,8 @@ class PlayerList extends React.Component {
 
 PlayerList.propTypes = {
 	players: React.PropTypes.array,
-	leader: React.PropTypes.string
+	leader: React.PropTypes.string,
+	numCards: React.PropTypes.number
 }
 
 export default PlayerList;

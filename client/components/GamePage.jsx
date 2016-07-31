@@ -6,9 +6,7 @@ class GamePage extends React.Component {
 
 	constructor() {
 		super();
-		this.getAvailableSlots = this.getAvailableSlots.bind(this);
-		this.selectCard = this.selectCard.bind(this);
-		this.deselectCard = this.deselectCard.bind(this);
+		this.hasRequiredPlayers = this.hasRequiredPlayers.bind(this);
 		this.updateDeckList = this.updateDeckList.bind(this);
 		this.joinGame = this.joinGame.bind(this);
 		this.startGame = this.startGame.bind(this);
@@ -18,51 +16,50 @@ class GamePage extends React.Component {
 		this.onPause = this.onPause.bind(this);
 		this.onReset = this.onReset.bind(this);
 		this.onChangeTimerLength = this.onChangeTimerLength.bind(this);
+		this.state = {
+			showWarning: false
+		}
 	}
 
-	getAvailableSlots() {
+	componentWillReceiveProps(nextProps) {
+		const numPlayers = nextProps.players.length;
+		const numCardsSelected = nextProps.deckList.length;
+		if(numCardsSelected < numPlayers) {
+			this.setState({ showWarning: false });
+		}
+	}
+
+	hasRequiredPlayers() {
 		const numPlayers = this.props.players.length;
 		const numCardsSelected = this.props.deckList.length;
-		const numCardsAvailable = numPlayers - numCardsSelected - 2;
-		return numCardsAvailable;
+		if(numCardsSelected + 2 > numPlayers) {
+			this.setState({ showWarning: true });
+			return false;
+		}
+		else {
+			this.setState({ showWarning: false });
+			return true;
+		}
 	}
 
 	updateDeckList(newCards) {
 		const playerId = this.props.playerId;
 		const isLeader = (playerId === this.props.leader);
+		const self = this;
 		if(isLeader){
 			console.log("updating decklist", newCards);
 			Meteor.call("updateDeckList", playerId, newCards, function(error, result) {
 	          if(result === "Not enough players") {
 	            console.log("Not enough players");
 	          }
+	          else {
+	          	self.setState({ showWarning: false });
+	          }
 	        });
 		}
 		else {
 			console.log("Unable to add cards.");
 		}
-	}
-
-	selectCard(card) {
-		const playerId = this.props.playerId;
-		const cardId = card._id;
-		const isLeader = (playerId === this.props.leader);
-		const hasSlotsAvailable = (this.getAvailableSlots() > 0);
-		if(isLeader && hasSlotsAvailable){
-			console.log("selected card", card);
-			Meteor.call("addCardToDeckList", playerId, cardId, function(error, result) {
-	          if(result === "Not enough players") {
-	            console.log("Not enough players");
-	          }
-	        });
-		}
-	}
-
-	deselectCard(card) {
-		const playerId = this.props.playerId;
-		const cardId = card._id;
-		const isLeader = (playerId === this.props.leader);
-		if(isLeader) { Meteor.call("removeCardFromDeckList", playerId, cardId); }
 	}
 
 	joinGame(gameId, playerName) {
@@ -78,6 +75,12 @@ class GamePage extends React.Component {
 	}
 
 	startGame() {
+		const numPlayers = this.props.players.length;
+		const numCardsSelected = this.props.deckList.length;
+		if(!this.hasRequiredPlayers()) {
+			return false
+		}
+		//otherwise start the game
 		console.log("starting game");
 		const gameId = this.props.gameId;
 		Meteor.call("startGame", gameId, function(error, success) {
@@ -123,6 +126,7 @@ class GamePage extends React.Component {
 
 	onStart() {
 		console.log("onstart");
+
 		Meteor.call("startTimer", this.props.gameId, function(error, time) {
 	        console.log("start time", time);
 	    });
@@ -164,7 +168,6 @@ class GamePage extends React.Component {
 	}
 
 	render() {
-		const availableSlots = this.getAvailableSlots();
 		if(this.props.stage == "Lobby") {
 			return(
 				<Lobby
@@ -172,7 +175,7 @@ class GamePage extends React.Component {
 					playerId={this.props.playerId}
 					leader={this.props.leader}
 					accessCode={this.props.accessCode}
-					availableSlots={availableSlots}
+					showWarning={this.state.showWarning}
 					cards={this.props.cards}
 					selectedCards={this.props.deckList}
 					updateDeckList={this.updateDeckList}

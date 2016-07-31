@@ -1,6 +1,7 @@
 import React from 'react';
 import AccessCodeModal from '../components/AccessCodeModal.jsx';
 import PlayerList from '../components/PlayerList.jsx';
+import WaitingOnPlayerList from '../components/WaitingOnPlayerList.jsx';
 import SelectName from '../components/SelectName.jsx';
 import CardList from '../components/CardList.jsx';
 
@@ -59,8 +60,11 @@ class Lobby extends React.Component {
 					<PlayerList
 						players={this.props.players}
 						leader={this.props.leader} />
+					<WaitingOnPlayerList
+						players={this.props.players}
+						selectedCards={this.props.selectedCards} />
 					<CardList
-							availableSlots={this.props.availableSlots}
+							showWarning={this.props.showWarning}
 							isLeader={isLeader}
 							cards={this.props.cards}
 							selectedCards={this.props.selectedCards}
@@ -88,7 +92,6 @@ Lobby.propTypes = {
 		React.PropTypes.bool
 	]),
 	accessCode: React.PropTypes.string,
-	availableSlots: React.PropTypes.number,
 	cards: React.PropTypes.array,
 	selectedCards: React.PropTypes.array,
 	updateDeckList: React.PropTypes.func,
