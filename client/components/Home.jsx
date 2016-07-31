@@ -41,6 +41,7 @@ class Home extends React.Component {
 
 	joinGame(e) {
 		e.preventDefault();
+		Session.setPersistent("playerId", null)
 		var accessCode = this.state.accessCode;
 		var game = Games.findOne({ accessCode: accessCode });
 		console.log(game);
